@@ -1,49 +1,103 @@
 import React, { Component } from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import M from "materialize-css";
 import fetchTopAlbums from "../topAlbums";
+import Album from "./album";
+import Modal from "./modal";
 
 class Albums extends Component {
   state = {
-    data: null,
+    albums: null,
+    favoriteIds: [],
+    modalAlbum: null,
+  };
+
+  handleFavorite = (e, idx) => {
+    e.stopPropagation();
+    const oldAlbums = this.state.albums;
+    const oldFavoriteIds = this.state.favoriteIds;
+    const album = {
+      ...oldAlbums[idx],
+      isFavorite: !oldAlbums[idx].isFavorite,
+    };
+    const albums = [
+      ...oldAlbums.slice(0, idx),
+      album,
+      ...oldAlbums.slice(idx + 1),
+    ];
+    const favoriteIds = album.isFavorite
+      ? [idx, ...oldFavoriteIds]
+      : oldFavoriteIds.filter((id) => id !== idx);
+    this.setState({ albums, favoriteIds });
+  };
+
+  handleExpand = (idx) => {
+    // TODO: come up with a better way for this
+    const modal = this.state.modalAlbum;
+    if (modal && this.state.albums[idx].name === modal.name) {
+      const ref = document.getElementById("modal1");
+      M.Modal.getInstance(ref).open();
+    } else {
+      this.setState({ modalAlbum: this.state.albums[idx] }, () => {
+        const ref = document.getElementById("modal1");
+        M.Modal.init(ref);
+        M.Modal.getInstance(ref).open();
+      });
+    }
   };
 
   componentDidMount() {
     fetchTopAlbums().then((data) =>
-      this.setState({ data: this.processData(data) })
+      this.setState({ albums: this.processData(data) })
     );
   }
 
   processData = (data) => {
-    const imgSize = "250";
-    const imgSuffix = imgSize + "x" + imgSize + "bb.png";
     const fields = [
       ["im:name", "name"],
       ["im:itemCount", "numSongs"],
       ["im:price", "priceStr"],
-      ["rights", "copyright"],
       ["id", "url"],
       ["im:artist", "artist"],
     ];
+
     return data["feed"]["entry"].map((entry, idx) => {
-      const genreInfo = entry["category"]["attributes"];
+      const genre = entry["category"]["attributes"];
       const date = new Date(entry["im:releaseDate"]["label"]);
-      const albumInfo = {
-        id: idx,
-        imageUrl: entry["im:image"][0]["label"].slice(0, -11) + imgSuffix,
+      const album = {
+        key: idx,
+        idx: idx,
+        imageUrl: entry["im:image"][2]["label"],
         isFavorite: false,
-        genre: genreInfo["term"],
-        genreUrl: genreInfo["scheme"],
+        genreName: genre["term"],
+        genreUrl: genre["scheme"],
         releaseDate: date.toString().slice(0, 15),
         releaseDatetime: date,
         priceNum: parseFloat(entry["im:price"]["attributes"]["amount"]),
       };
-      fields.map((field) => (albumInfo[field[1]] = entry[field[0]]["label"]));
-      return albumInfo;
+      fields.map((field) => (album[field[1]] = entry[field[0]]["label"]));
+      return album;
     });
   };
 
   render() {
-    return this.state.data ? <h1>Hello, World!</h1> : <LinearProgress />;
+    const albums = this.state.albums;
+    return albums ? (
+      <div className="container">
+        <Modal {...this.state.modalAlbum} />
+        <div className="row">
+          {albums.map((a) => (
+            <Album
+              {...a}
+              onFavorite={(e) => this.handleFavorite(e, a.idx)}
+              onExpand={() => this.handleExpand(a.idx)}
+            />
+          ))}
+        </div>
+      </div>
+    ) : (
+      <LinearProgress />
+    );
   }
 }
 

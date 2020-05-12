@@ -1,13 +1,12 @@
 import React from "react";
 import Albums from "./components/albums";
-import "./index.css";
 
 function App() {
   return (
-    <div id="container">
+    <React.Fragment>
       {/* <Navbar /> */}
       <Albums />
-    </div>
+    </React.Fragment>
   );
 }
 
