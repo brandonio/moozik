@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import fetchTopAlbums from "./topAlbums";
 import Navbar from "./components/navbar";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import AlbumsView from "./components/albums";
+import AlbumsView from "./components/albumsView";
+import AlbumPopup from "./components/albumPopup";
 
 class App extends Component {
   state = {
     albums: null,
     faves: JSON.parse(localStorage.getItem("faves")) || {},
     showFaves: false,
+    popup: null,
   };
 
   componentDidMount() {
@@ -33,12 +35,10 @@ class App extends Component {
         key: idx,
         id: idx,
         isFave: faves[idx] || false,
-        imageUrl: entry["im:image"][2]["label"].slice(0, -11) + "400x400bb.png",
+        imageUrl: entry["im:image"][2]["label"].slice(0, -13) + "400x400bb.png",
         genreName: genre["term"],
         genreUrl: genre["scheme"],
         releaseDate: date.toString().slice(0, 15),
-        releaseDatetime: date,
-        priceNum: parseFloat(entry["im:price"]["attributes"]["amount"]),
       };
       fields.map((field) => (album[field[1]] = entry[field[0]]["label"]));
       return album;
@@ -61,25 +61,31 @@ class App extends Component {
       },
       ...oldAlbums.slice(id + 1),
     ];
+
     this.setState({ albums, faves });
   };
 
-  handleExpandClick = (id) => {
-    console.log("trying to expand", id);
-  };
+  handleExpandClick = (id) => this.setState({ popup: id });
+
+  handleModalClose = () => this.setState({ popup: null });
 
   render() {
     const showFaves = this.state.showFaves;
-    const albums = showFaves
-      ? Object.keys(this.state.faves).map((idx) => this.state.albums[idx])
-      : this.state.albums;
+    const faves = this.state.faves;
+    const albums = this.state.albums;
+    const popup = this.state.popup;
+    const albumsToShow =
+      showFaves && albums ? albums.filter((a) => faves[a.id]) : albums;
     return (
       <React.Fragment>
         <Navbar showFaves={showFaves} onClick={this.handleNavBtnClick} />
+        {popup !== null && (
+          <AlbumPopup {...albums[popup]} onClose={this.handleModalClose} />
+        )}
         <div className="container center">
-          {albums ? (
+          {albumsToShow ? (
             <AlbumsView
-              albums={albums}
+              albums={albumsToShow}
               onStarClick={this.handleStarClick}
               onExpandClick={this.handleExpandClick}
             />

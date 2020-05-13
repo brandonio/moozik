@@ -7,21 +7,29 @@ import Button from "@material-ui/core/Button";
 const Navbar = (props) => {
   return (
     <div style={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h4" style={{ flexGrow: 1 }}>
-            Moozik
+            <a
+              style={{ color: "white" }}
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://translate.google.com/#view=home&op=translate&sl=fa&tl=en&text=moozik"
+            >
+              <b>♫ Moozik</b>
+            </a>
           </Typography>
           <Typography variant="h5" style={{ flexGrow: 1 }}>
             {props.showFaves ? "Favorites" : "All Albums"}
           </Typography>
-          <Button color="inherit" onClick={props.onClick}>
+          <Button className="yellow-text text-darken-1" onClick={props.onClick}>
             {props.showFaves ? "All Albums" : "Favorites"}
           </Button>
         </Toolbar>
       </AppBar>
+      <Toolbar />
     </div>
   );
-}
+};
 
 export default Navbar;

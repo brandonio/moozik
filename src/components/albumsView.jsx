@@ -1,5 +1,5 @@
 import React from "react";
-import Album from "./album";
+import AlbumCard from "./albumCard";
 
 const AlbumsView = (props) => {
   const albums = props.albums;
@@ -10,7 +10,7 @@ const AlbumsView = (props) => {
           <h4>There's nothing here...</h4>
         ) : (
           props.albums.map((a) => (
-            <Album
+            <AlbumCard
               {...a}
               onStarClick={() => props.onStarClick(a.id)}
               onExpandClick={() => props.onExpandClick(a.id)}
