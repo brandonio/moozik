@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-export default function Navbar(props) {
+const Navbar = (props) => {
   return (
     <div style={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -23,3 +23,5 @@ export default function Navbar(props) {
     </div>
   );
 }
+
+export default Navbar;
