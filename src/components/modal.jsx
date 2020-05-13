@@ -5,7 +5,7 @@ const Modal = (props) => {
     <div
       id="modal1"
       className="modal card"
-      style={{ width: "25%", maxHeight: "90%" }}
+      style={{ width: "23%", maxHeight: "90%" }}
     >
       <div className="card-image">
         <img src={props.imageUrl} alt={props.name} />
@@ -20,7 +20,7 @@ const Modal = (props) => {
       </div>
       <div className="card-action">
         <a href={props.url}>More Info</a>
-        <a href={props.genreUrl}>More Like This</a>
+        <a href={props.genreUrl}>Similar Albums</a>
       </div>
     </div>
   );
