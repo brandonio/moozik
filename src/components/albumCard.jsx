@@ -6,6 +6,7 @@ import StarBorder from "@material-ui/icons/StarBorder";
 
 const AlbumCard = ({
   artist,
+  id,
   image,
   isFave,
   onExpandClick,
@@ -15,7 +16,7 @@ const AlbumCard = ({
   return (
     <div className="col s3">
       <div
-        onClick={onExpandClick}
+        onClick={onExpandClick(id)}
         className="card hoverable"
         style={{ cursor: "pointer", height: 400, borderRadius: 15 }}
       >
@@ -30,7 +31,7 @@ const AlbumCard = ({
             control={
               <Checkbox
                 onClick={(e) => e.stopPropagation()}
-                onChange={onStarClick}
+                onChange={onStarClick(id)}
                 icon={<StarBorder />}
                 checkedIcon={<Star />}
                 checked={isFave}

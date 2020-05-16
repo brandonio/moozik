@@ -18,28 +18,25 @@ class App extends Component {
     );
   }
 
-  processData = (data, faves) => {
-    return data["feed"]["entry"].map((entry, idx) => {
-      return {
-        key: idx,
-        id: idx,
-        isFave: faves[idx] || false,
-        title: entry["im:name"]["label"],
-        songCount: entry["im:itemCount"]["label"],
-        price: entry["im:price"]["label"],
-        artist: entry["im:artist"]["label"],
-        image: entry["im:image"][0]["label"].slice(0, -11) + "400x400bb.png",
-        genre: entry["category"]["attributes"]["term"],
-        releaseDate: Date(entry["im:releaseDate"]["label"])
-          .toString()
-          .slice(0, 15),
-      };
-    });
-  };
+  processData = (data, faves) =>
+    data["feed"]["entry"].map((entry, idx) => ({
+      key: idx,
+      id: idx,
+      isFave: faves[idx] || false,
+      title: entry["im:name"]["label"],
+      songCount: entry["im:itemCount"]["label"],
+      price: entry["im:price"]["label"],
+      artist: entry["im:artist"]["label"],
+      image: entry["im:image"][0]["label"].slice(0, -11) + "400x400bb.png",
+      genre: entry["category"]["attributes"]["term"],
+      releaseDate: Date(entry["im:releaseDate"]["label"])
+        .toString()
+        .slice(0, 15),
+    }));
 
   handleNavBtnClick = () => this.setState({ showFaves: !this.state.showFaves });
 
-  handleStarClick = (id) => {
+  handleStarClick = (id) => () => {
     const { faves, albums } = this.state;
     faves[id] ? delete faves[id] : (faves[id] = true);
     localStorage.setItem("faves", JSON.stringify(faves));
@@ -53,15 +50,15 @@ class App extends Component {
     this.setState({ albums: albumsNew, faves });
   };
 
-  handleExpandClick = (id) => this.setState({ popup: id });
+  handleExpandClick = (id) => () => this.setState({ popup: id });
 
   handleModalClose = () => this.setState({ popup: null });
 
   render() {
     const { showFaves, faves, albums, popup } = this.state;
-    const albumsToShow =
+    const albumsToView =
       showFaves && albums
-        ? Object.keys(faves).map((a) => albums[a.id])
+        ? Object.keys(faves).map((a) => albums[parseInt(a)])
         : albums;
     return (
       <React.Fragment>
@@ -70,7 +67,7 @@ class App extends Component {
           <AlbumPopup {...albums[popup]} onClose={this.handleModalClose} />
         )}
         <AlbumsView
-          albums={albumsToShow}
+          albums={albumsToView}
           onStarClick={this.handleStarClick}
           onExpandClick={this.handleExpandClick}
         />

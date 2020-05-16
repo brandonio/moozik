@@ -3,7 +3,6 @@ import AlbumCard from "./albumCard";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const AlbumsView = ({ albums, onExpandClick, onStarClick }) => {
-  console.log(albums && albums.length);
   return (
     <div className="container center">
       <div className="section">
@@ -12,8 +11,9 @@ const AlbumsView = ({ albums, onExpandClick, onStarClick }) => {
             albums.map((a) => (
               <AlbumCard
                 {...a}
-                onStarClick={() => onStarClick(a.id)}
-                onExpandClick={() => onExpandClick(a.id)}
+                key={a.id}
+                onStarClick={onStarClick}
+                onExpandClick={onExpandClick}
               />
             ))
           ) : albums ? (

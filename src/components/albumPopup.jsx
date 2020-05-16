@@ -10,7 +10,6 @@ const AlbumPopup = ({
   releaseDate,
   songCount,
   title,
-  open,
 }) => {
   const info = [
     { name: "Album", val: title },
@@ -28,7 +27,7 @@ const AlbumPopup = ({
         alignItems: "center",
       }}
       onClose={onClose}
-      open={open}
+      open={true}
     >
       <div className="card" style={{ width: "23%", maxHeight: "85%" }}>
         <div className="card-image">
@@ -39,7 +38,7 @@ const AlbumPopup = ({
           style={{ display: "flex", flexDirection: "column" }}
         >
           {info.map(({ name, val }) => (
-            <span>
+            <span key={name}>
               <b>{name}</b>: {val}
             </span>
           ))}

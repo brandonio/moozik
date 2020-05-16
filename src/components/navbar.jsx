@@ -1,15 +1,15 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+// import Typography from "@material-ui/core/Typography";
+// import Button from "@material-ui/core/Button";
 
 const Navbar = ({ onClick, showFaves }) => {
   return (
     <div style={{ flexGrow: 1 }}>
       <AppBar position="fixed">
-        <Toolbar>
-          <Typography variant="h4" style={{ flexGrow: 1 }}>
+        <Toolbar className="valign-wrapper">
+          <h4 style={{ flexGrow: 1 }}>
             <a
               style={{ color: "white" }}
               target="_blank"
@@ -18,13 +18,13 @@ const Navbar = ({ onClick, showFaves }) => {
             >
               <b>♫ Moozik</b>
             </a>
-          </Typography>
-          <Typography variant="h5" style={{ flexGrow: 1 }}>
+          </h4>
+          <h5 style={{ flexGrow: 1 }}>
             {showFaves ? "Favorites" : "All Albums"}
-          </Typography>
-          <Button className="btn yellow darken-1" onClick={onClick}>
-            {showFaves ? "All Albums" : "Favorites"}
-          </Button>
+          </h5>
+          <button className="btn yellow darken-1 black-text" onClick={onClick}>
+            <b>{showFaves ? "All Albums" : "Favorites"}</b>
+          </button>
         </Toolbar>
       </AppBar>
       <Toolbar />
