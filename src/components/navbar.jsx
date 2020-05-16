@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-const Navbar = (props) => {
+const Navbar = ({ onClick, showFaves }) => {
   return (
     <div style={{ flexGrow: 1 }}>
       <AppBar position="fixed">
@@ -20,10 +20,10 @@ const Navbar = (props) => {
             </a>
           </Typography>
           <Typography variant="h5" style={{ flexGrow: 1 }}>
-            {props.showFaves ? "Favorites" : "All Albums"}
+            {showFaves ? "Favorites" : "All Albums"}
           </Typography>
-          <Button className="yellow-text text-darken-1" onClick={props.onClick}>
-            {props.showFaves ? "All Albums" : "Favorites"}
+          <Button className="btn yellow darken-1" onClick={onClick}>
+            {showFaves ? "All Albums" : "Favorites"}
           </Button>
         </Toolbar>
       </AppBar>

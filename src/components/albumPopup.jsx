@@ -1,7 +1,25 @@
 import React from "react";
 import Modal from "@material-ui/core/Modal";
 
-const AlbumPopup = (props) => {
+const AlbumPopup = ({
+  artist,
+  genre,
+  image,
+  onClose,
+  price,
+  releaseDate,
+  songCount,
+  title,
+  open,
+}) => {
+  const info = [
+    { name: "Album", val: title },
+    { name: "Artist", val: artist },
+    { name: "Genre", val: genre },
+    { name: "Released", val: releaseDate },
+    { name: "Songs", val: songCount },
+    { name: "Cost", val: price },
+  ];
   return (
     <Modal
       style={{
@@ -9,35 +27,22 @@ const AlbumPopup = (props) => {
         justifyContent: "center",
         alignItems: "center",
       }}
-      onClose={props.onClose}
-      open={true}
+      onClose={onClose}
+      open={open}
     >
       <div className="card" style={{ width: "23%", maxHeight: "85%" }}>
         <div className="card-image">
-          <img src={props.imageUrl} alt={props.name} />
+          <img src={image} alt={title} />
         </div>
-        <div className="card-content">
-          <h6 style={{ lineHeight: 1.5 }}>
-            <b>Album:</b> {props.name}
-            <br />
-            <b>Artist:</b> {props.artist}
-            <br />
-            <b>Genre:</b> {props.genreName}
-            <br />
-            <b>Released:</b> {props.releaseDate}
-            <br />
-            <b>Songs:</b> {props.numSongs}
-            <br />
-            <b>Cost:</b> {props.priceStr}
-          </h6>
-        </div>
-        <div className="card-action">
-          <a rel="noopener noreferrer" target="_blank" href={props.url}>
-            Listen
-          </a>
-          <a rel="noopener noreferrer" target="_blank" href={props.genreUrl}>
-            More Like This
-          </a>
+        <div
+          className="card-content"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          {info.map(({ name, val }) => (
+            <span>
+              <b>{name}</b>: {val}
+            </span>
+          ))}
         </div>
       </div>
     </Modal>

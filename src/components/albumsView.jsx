@@ -1,22 +1,27 @@
 import React from "react";
 import AlbumCard from "./albumCard";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-const AlbumsView = (props) => {
-  const albums = props.albums;
+const AlbumsView = ({ albums, onExpandClick, onStarClick }) => {
+  console.log(albums && albums.length);
   return (
-    <div className="section">
-      <div className="row">
-        {albums.length === 0 ? (
-          <h4>There's nothing here...</h4>
-        ) : (
-          props.albums.map((a) => (
-            <AlbumCard
-              {...a}
-              onStarClick={() => props.onStarClick(a.id)}
-              onExpandClick={() => props.onExpandClick(a.id)}
-            />
-          ))
-        )}
+    <div className="container center">
+      <div className="section">
+        <div className="row">
+          {albums && albums.length ? (
+            albums.map((a) => (
+              <AlbumCard
+                {...a}
+                onStarClick={() => onStarClick(a.id)}
+                onExpandClick={() => onExpandClick(a.id)}
+              />
+            ))
+          ) : albums ? (
+            <h4>There's nothing here...</h4>
+          ) : (
+            <CircularProgress size={200} style={{ marginTop: 200 }} />
+          )}
+        </div>
       </div>
     </div>
   );
