@@ -1,8 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
-const Navbar = ({ onClick, showFaves }) => {
+type Props = {
+  onClick: () => void;
+  showFaves: boolean;
+};
+
+const Navbar: FC<Props> = ({ onClick, showFaves }) => {
   return (
     <div style={{ flexGrow: 1 }}>
       <AppBar position="fixed">

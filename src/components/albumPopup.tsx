@@ -1,16 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import Modal from "@material-ui/core/Modal";
 
-const AlbumPopup = ({
-  artist,
-  genre,
-  image,
-  onClose,
-  price,
-  releaseDate,
-  songCount,
-  title,
-}) => {
+type Props = {
+  album: Album;
+  onClose: () => void;
+};
+
+const AlbumPopup: FC<Props> = ({ album, onClose }) => {
+  const { artist, genre, image, price, releaseDate, songCount, title } = album;
   const info = [
     { name: "Album", val: title },
     { name: "Artist", val: artist },

@@ -1,22 +1,19 @@
-import React from "react";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Star from "@material-ui/icons/Star";
-import StarBorder from "@material-ui/icons/StarBorder";
+import React, { FC } from "react";
+import { FormControlLabel, Checkbox } from "@material-ui/core";
+import { StarBorder, Star } from "@material-ui/icons";
 
-const AlbumCard = ({
-  artist,
-  id,
-  image,
-  isFave,
-  onExpandClick,
-  onStarClick,
-  title,
-}) => {
+type Props = {
+  album: Album;
+  onExpandClick: (id: number) => void;
+  onStarClick: (id: number) => void;
+};
+
+const AlbumCard: FC<Props> = ({ album, onExpandClick, onStarClick }) => {
+  const { artist, id, image, isFave, title } = album;
   return (
     <div className="col s3">
       <div
-        onClick={onExpandClick(id)}
+        onClick={() => onExpandClick(id)}
         className="card hoverable"
         style={{ cursor: "pointer", height: 400, borderRadius: 15 }}
       >
@@ -27,14 +24,15 @@ const AlbumCard = ({
             style={{ borderTopLeftRadius: 15, borderTopRightRadius: 15 }}
           />
           <FormControlLabel
+            label=""
             className="btn-floating halfway-fab yellow darken-1"
             control={
               <Checkbox
-                onClick={(e) => e.stopPropagation()}
-                onChange={onStarClick(id)}
-                icon={<StarBorder />}
-                checkedIcon={<Star />}
                 checked={isFave}
+                checkedIcon={<Star />}
+                icon={<StarBorder />}
+                onChange={() => onStarClick(id)}
+                onClick={(e) => e.stopPropagation()}
               />
             }
           />
