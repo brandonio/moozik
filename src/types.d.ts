@@ -3,9 +3,10 @@ type Album = {
   genre: string;
   id: number;
   image: string;
-  isFave: boolean;
   price: string;
   releaseDate: string;
   songCount: number;
   title: string;
 };
+
+type Faves = { [key: string]: boolean };

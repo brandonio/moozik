@@ -4,12 +4,13 @@ import { StarBorder, Star } from "@material-ui/icons";
 
 type Props = {
   album: Album;
+  isFave: boolean;
   onExpandClick: (id: number) => void;
   onStarClick: (id: number) => void;
 };
 
-const AlbumCard: FC<Props> = ({ album, onExpandClick, onStarClick }) => {
-  const { artist, id, image, isFave, title } = album;
+const AlbumCard: FC<Props> = ({ album, isFave, onExpandClick, onStarClick }) => {
+  const { artist, id, image, title } = album;
   return (
     <div className="col s3">
       <div
