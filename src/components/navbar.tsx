@@ -22,7 +22,15 @@ const Navbar: FC<Props> = ({ onClick, showFaves }) => {
               <b>♫ Moozik</b>
             </a>
           </h4>
-          <h5 style={{ flexGrow: 1 }}>{showFaves ? "Favorites" : "Albums"}</h5>
+          <h5
+            onClick={() => window.scroll({ top: 0, behavior: "smooth" })}
+            style={{
+              flexGrow: 1,
+              cursor: "pointer",
+            }}
+          >
+            {showFaves ? "Favorites" : "Albums"}
+          </h5>
           <button
             className="btn yellow darken-1 black-text"
             onClick={onClick}

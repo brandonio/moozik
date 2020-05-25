@@ -45,7 +45,6 @@ const AlbumCard: FC<Props> = ({
               marginRight: 0,
               marginLeft: -16.2,
             }}
-            // style={{ width: 35, height: 35, lineHeight: 35 }}
             control={
               <Checkbox
                 checked={isFave}
