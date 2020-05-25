@@ -2,11 +2,13 @@ import React, { FC } from "react";
 import Modal from "@material-ui/core/Modal";
 
 type Props = {
-  album: Album;
+  album?: Album;
   onClose: () => void;
 };
 
 const AlbumPopup: FC<Props> = ({ album, onClose }) => {
+  if (!album) return null;
+
   const { artist, genre, image, price, releaseDate, songCount, title } = album;
   const info = [
     { name: "Album", val: title },

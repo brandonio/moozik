@@ -22,11 +22,13 @@ const Navbar: FC<Props> = ({ onClick, showFaves }) => {
               <b>♫ Moozik</b>
             </a>
           </h4>
-          <h5 style={{ flexGrow: 1 }}>
-            {showFaves ? "Favorites" : "All Albums"}
-          </h5>
-          <button className="btn yellow darken-1 black-text" onClick={onClick}>
-            <b>{showFaves ? "All Albums" : "Favorites"}</b>
+          <h5 style={{ flexGrow: 1 }}>{showFaves ? "Favorites" : "Albums"}</h5>
+          <button
+            className="btn yellow darken-1 black-text"
+            onClick={onClick}
+            style={{ width: 125 }}
+          >
+            <b>{showFaves ? "Albums" : "Favorites"}</b>
           </button>
         </Toolbar>
       </AppBar>
