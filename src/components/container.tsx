@@ -5,7 +5,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import FloatingButton from "./floatingButton";
 import GenreRow from "./genreRow";
 import { fetchAlbums, processAlbums, fetchGenres } from "../topAlbums";
-import { KeyboardArrowUp, Star } from "@material-ui/icons";
+import {
+  StarBorderOutlined,
+  StarTwoTone,
+  StarBorderTwoTone,
+  StarsOutlined,
+  Star,
+} from "@material-ui/icons";
 
 const Container: FC = () => {
   const [albums, setAlbums] = useState<Album[] | undefined>(undefined);
@@ -28,10 +34,9 @@ const Container: FC = () => {
 
   const handleGenreClick = (id: number): void =>
     setGenres({ ...genres, current: id });
+
   const handleModalOpen = (index: number): void => setPopup(index);
   const handleModalClose = (): void => setPopup(-1);
-  const handleScrollClick = (): void =>
-    window.scrollTo({ top: 0, behavior: "smooth" });
 
   const updateFaves = (favesNew: Faves): void => {
     localStorage.setItem("faves", JSON.stringify(favesNew));
@@ -67,34 +72,21 @@ const Container: FC = () => {
           ) : (
             <h4>There's nothing here...</h4>
           )}
-          <FloatingButton
-            side="left"
-            color={"#0288d1"}
-            onClick={handleScrollClick}
-          >
-            <KeyboardArrowUp fontSize="large" />
-          </FloatingButton>
-          <FloatingButton
-            side="right"
-            color={faves.show ? "#512da8" : "#fdd835"}
-            onClick={handleSwitchView}
-          >
-            {faves.show ? (
-              <img
-                src="favicon.svg"
-                height={28}
-                width={28}
-                alt="All"
-                style={{ marginRight: 2 }}
-              />
-            ) : (
-              <Star fontSize="large" />
-            )}
-          </FloatingButton>
           <AlbumPopup
             album={albums ? albums[popup] : undefined}
             onClose={handleModalClose}
           />
+          <FloatingButton
+            side="right"
+            color={faves.show ? "#512da8" : "#fcc830"}
+            onClick={handleSwitchView}
+          >
+            {faves.show ? (
+              <img src="favicon.svg" height={25} width={25} alt="All" />
+            ) : (
+              <Star fontSize="large" />
+            )}
+          </FloatingButton>
         </div>
       </div>
     </div>
