@@ -1,11 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import Navbar from "./components/navbar";
+import Container from "./components/container";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <React.Fragment>
+      <Navbar />
+      <Container />
+    </React.Fragment>
   </React.StrictMode>,
   document.getElementById("root")
 );

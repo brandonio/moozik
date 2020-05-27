@@ -1,48 +1,31 @@
 import React, { FC } from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 
-type Props = {
-  onClick: () => void;
-  showFaves: boolean;
+// TODO: use emotion css and fix this
+const r: "fixed" = "fixed";
+const navbarStyle = {
+  alignItems: "center",
+  background: "linear-gradient(to left, #0288d1, #3d99be 25%, #512da8)",
+  boxShadow: "0 3px 6px -2px #444",
+  display: "flex",
+  height: 70,
+  justifyContent: "center",
+  marginBottom: 70,
+  position: r,
+  width: "100%",
+  zIndex: 2,
+  color: "white",
 };
 
-const Navbar: FC<Props> = ({ onClick, showFaves }) => {
-  return (
-    <div style={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
-        <Toolbar className="valign-wrapper">
-          <h4 style={{ flexGrow: 1 }}>
-            <a
-              style={{ color: "white" }}
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://translate.google.com/#view=home&op=translate&sl=fa&tl=en&text=moozik"
-            >
-              <b>♫ Moozik</b>
-            </a>
-          </h4>
-          <h5
-            onClick={() => window.scroll({ top: 0, behavior: "smooth" })}
-            style={{
-              flexGrow: 1,
-              cursor: "pointer",
-            }}
-          >
-            {showFaves ? "Favorites" : "Albums"}
-          </h5>
-          <button
-            className="btn yellow darken-1 black-text"
-            onClick={onClick}
-            style={{ width: 125 }}
-          >
-            <b>{showFaves ? "Albums" : "Favorites"}</b>
-          </button>
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
-    </div>
-  );
-};
+const egg: string =
+  "https://translate.google.com/#view=home&op=translate&sl=fa&tl=en&text=moozik";
+
+const Navbar: FC = () => (
+  <div style={navbarStyle}>
+    <a target="_blank" rel="noopener noreferrer" href={egg}>
+      <img src="/favicon.svg" height={45} width={45} alt="M" />
+    </a>
+    <span style={{ color: "white", fontSize: 50 }}>oozik</span>
+  </div>
+);
 
 export default Navbar;

@@ -9,7 +9,9 @@ type Props = {
 
 const GenreButton: FC<Props> = ({ id, name, onClick, pressed }) => (
   <button
-    className={(pressed ? "indigo z-depth-0" : "light-blue") + " btn darken-1"}
+    className={
+      (pressed ? "deep-purple z-depth-0" : "light-blue") + " btn darken-2"
+    }
     onClick={() => onClick(id)}
     style={{ margin: 10 }}
   >

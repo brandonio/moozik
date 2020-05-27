@@ -4,8 +4,8 @@ import AlbumCard from "./albumCard";
 type Props = {
   albums: Album[];
   faves: Faves;
-  onExpandClick: (id: number) => void;
-  onStarClick: (id: number) => void;
+  onExpandClick: (index: number) => void;
+  onStarClick: (id: string) => void;
 };
 
 const AlbumsView: FC<Props> = ({
@@ -17,7 +17,7 @@ const AlbumsView: FC<Props> = ({
   <React.Fragment>
     {albums.map((a) => (
       <AlbumCard
-        key={a.id.toString()}
+        key={a.id}
         album={a}
         isFave={faves[a.id]}
         onStarClick={onStarClick}

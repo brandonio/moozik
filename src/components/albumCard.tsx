@@ -3,6 +3,8 @@ import { FormControlLabel, Checkbox } from "@material-ui/core";
 import { StarBorder, Star } from "@material-ui/icons";
 
 const maxLength: number = 30;
+
+// TODO?: smarter trimming
 const trim = (s: string): string =>
   s.length > maxLength ? s.substring(0, maxLength - 1) + "…" : s;
 
@@ -10,7 +12,7 @@ type Props = {
   album: Album;
   isFave: boolean;
   onExpandClick: (index: number) => void;
-  onStarClick: (id: number) => void;
+  onStarClick: (id: string) => void;
 };
 
 const AlbumCard: FC<Props> = ({

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import Modal from "@material-ui/core/Modal";
 
 type Props = {
-  album?: Album;
+  album: Album | undefined;
   onClose: () => void;
 };
 

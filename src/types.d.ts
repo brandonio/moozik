@@ -1,7 +1,7 @@
 type Album = {
   artist: string;
   genre: string;
-  id: number;
+  id: string;
   image: string;
   index: number;
   price: string;
@@ -10,5 +10,5 @@ type Album = {
   title: string;
 };
 
-type Faves = { [key: string]: boolean };
-type Genres = { [key: string]: number };
+type Faves = { [_: string]: boolean };
+type Genres = { [name: string]: number };
