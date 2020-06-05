@@ -22,7 +22,7 @@ const egg: string =
 const Navbar: FC = () => (
   <div style={navbarStyle}>
     <a target="_blank" rel="noopener noreferrer" href={egg}>
-      <img src="/favicon.svg" height={45} width={45} alt="M" />
+      <img src="/favicon.svg" height={44} width={44} alt="M" />
     </a>
     <span style={{ color: "white", fontSize: 50 }}>oozik</span>
   </div>

@@ -3,7 +3,7 @@ import GenreButton from "./genreButton";
 
 type Props = {
   genres: Genres;
-  onGenreClick: (id: number) => void;
+  onGenreClick: (genreId: number) => void;
 };
 
 const GenreRow: FC<Props> = ({ genres, onGenreClick }) => (
@@ -17,14 +17,14 @@ const GenreRow: FC<Props> = ({ genres, onGenreClick }) => (
     }}
   >
     {Object.entries(genres).map(
-      ([name, id]) =>
+      ([name, genreId]) =>
         name !== "current" && (
           <GenreButton
-            key={id}
-            id={id}
+            key={genreId}
+            genreId={genreId}
             name={name}
             onClick={onGenreClick}
-            pressed={id === genres.current}
+            pressed={genreId === genres.current}
           />
         )
     )}

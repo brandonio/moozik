@@ -11,24 +11,19 @@ const trim = (s: string): string =>
 type Props = {
   album: Album;
   isFave: boolean;
-  onExpandClick: (index: number) => void;
+  onModalOpen: (id: string) => void;
   onStarClick: (id: string) => void;
 };
 
-const AlbumCard: FC<Props> = ({
-  album,
-  isFave,
-  onExpandClick,
-  onStarClick,
-}) => {
-  const { artist, id, image, index, title } = album;
+const AlbumCard: FC<Props> = ({ album, isFave, onModalOpen, onStarClick }) => {
+  const { artist, id, image, title } = album;
   return (
     <div
       className="col"
       style={{ width: "20%", marginLeft: "auto", left: "auto", right: "auto" }}
     >
       <div
-        onClick={() => onExpandClick(index)}
+        onClick={() => onModalOpen(id)}
         className="card hoverable"
         style={{ cursor: "pointer", height: 300, borderRadius: 15 }}
       >

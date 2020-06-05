@@ -33,20 +33,24 @@ const fetchAlbums = async (
   ).then((res) => res.json());
 
 // TODO: fix usage of "any"
-const processAlbums = (json: any): Album[] =>
-  json["feed"]["entry"].map((entry: any, idx: number) => ({
-    artist: entry["im:artist"]["label"],
-    genre: entry["category"]["attributes"]["term"],
-    id: entry["id"]["attributes"]["im:id"],
-    image: entry["im:image"][0]["label"].slice(0, -11) + "400x400bb.png",
-    index: idx,
-    key: idx,
-    price: entry["im:price"]["label"],
-    releaseDate: new Date(entry["im:releaseDate"]["label"])
-      .toString()
-      .slice(0, 15),
-    songCount: entry["im:itemCount"]["label"],
-    title: entry["im:name"]["label"],
-  }));
+const processAlbums = (json: any): AlbumMap => {
+  const albums: AlbumMap = {};
+  json["feed"]["entry"].forEach((entry: any) => {
+    const id = entry["id"]["attributes"]["im:id"];
+    albums[id] = {
+      artist: entry["im:artist"]["label"],
+      genre: entry["category"]["attributes"]["term"],
+      id: id,
+      image: entry["im:image"][0]["label"].slice(0, -11) + "400x400bb.png",
+      price: entry["im:price"]["label"],
+      releaseDate: new Date(entry["im:releaseDate"]["label"])
+        .toString()
+        .slice(0, 15),
+      songCount: entry["im:itemCount"]["label"],
+      title: entry["im:name"]["label"],
+    };
+  });
+  return albums;
+};
 
 export { fetchGenres, fetchAlbums, processAlbums };

@@ -4,27 +4,22 @@ import AlbumCard from "./albumCard";
 type Props = {
   albums: Album[];
   faves: Faves;
-  onExpandClick: (index: number) => void;
+  onModalOpen: (id: string) => void;
   onStarClick: (id: string) => void;
 };
 
-const AlbumsView: FC<Props> = ({
-  albums,
-  faves,
-  onExpandClick,
-  onStarClick,
-}) => (
-  <React.Fragment>
+const AlbumsView: FC<Props> = ({ albums, faves, onModalOpen, onStarClick }) => (
+  <div className="row">
     {albums.map((a) => (
       <AlbumCard
-        key={a.id}
         album={a}
         isFave={faves[a.id]}
+        key={a.id}
         onStarClick={onStarClick}
-        onExpandClick={onExpandClick}
+        onModalOpen={onModalOpen}
       />
     ))}
-  </React.Fragment>
+  </div>
 );
 
 export default AlbumsView;

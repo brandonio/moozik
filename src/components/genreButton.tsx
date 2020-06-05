@@ -1,18 +1,18 @@
 import React, { FC } from "react";
 
 type Props = {
-  id: number;
+  genreId: number;
   name: string;
-  onClick: (id: number) => void;
+  onClick: (genreId: number) => void;
   pressed: boolean;
 };
 
-const GenreButton: FC<Props> = ({ id, name, onClick, pressed }) => (
+const GenreButton: FC<Props> = ({ genreId, name, onClick, pressed }) => (
   <button
     className={
       (pressed ? "deep-purple z-depth-0" : "light-blue") + " btn darken-2"
     }
-    onClick={() => onClick(id)}
+    onClick={() => onClick(genreId)}
     style={{ margin: 10 }}
   >
     {name}

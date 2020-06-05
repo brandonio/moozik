@@ -3,12 +3,12 @@ type Album = {
   genre: string;
   id: string;
   image: string;
-  index: number;
   price: string;
   releaseDate: string;
   songCount: number;
   title: string;
 };
 
+type AlbumMap = { [id: string]: Album };
 type Faves = { [_: string]: boolean };
 type Genres = { [name: string]: number };

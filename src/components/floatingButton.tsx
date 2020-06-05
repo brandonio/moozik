@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 // TODO: use emotion css and fix this
-const c: "column" = "column";
+// const c: "column" = "column";
 const f: "fixed" = "fixed";
 const style = {
   alignItems: "center",
@@ -12,7 +12,7 @@ const style = {
   color: "white",
   cursor: "pointer",
   display: "flex",
-  flexDirection: c,
+  // flexDirection: c,
   height: 60,
   justifyContent: "center",
   position: f,
@@ -21,17 +21,18 @@ const style = {
 };
 
 type Props = {
+  child: any;
   color: string;
   onClick: () => void;
   side: string;
 };
 
-const FloatingButton: FC<Props> = ({ color, onClick, side, children }) => (
+const FloatingButton: FC<Props> = ({ child, color, onClick, side }) => (
   <div
     style={{ ...style, backgroundColor: color, [side]: 23 }}
     onClick={onClick}
   >
-    {children}
+    {child}
   </div>
 );
 
