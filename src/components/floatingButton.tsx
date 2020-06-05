@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 
 // TODO: use emotion css and fix this
-// const c: "column" = "column";
 const f: "fixed" = "fixed";
 const style = {
   alignItems: "center",
@@ -12,7 +11,6 @@ const style = {
   color: "white",
   cursor: "pointer",
   display: "flex",
-  // flexDirection: c,
   height: 60,
   justifyContent: "center",
   position: f,
