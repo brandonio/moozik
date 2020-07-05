@@ -32,7 +32,6 @@ const fetchAlbums = async (
     `https://itunes.apple.com/us/rss/topalbums/genre=${genre}/explicit=${explicit}/limit=${limit}/json`
   ).then((res) => res.json());
 
-// TODO: fix usage of "any"
 const processAlbums = (json: any): AlbumMap => {
   const albums: AlbumMap = {};
   json["feed"]["entry"].forEach((entry: any) => {

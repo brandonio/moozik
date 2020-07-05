@@ -21,14 +21,18 @@ const style = {
 type Props = {
   child: any;
   color: string;
+  isRight: boolean;
   onClick: () => void;
-  side: string;
 };
 
-const FloatingButton: FC<Props> = ({ child, color, onClick, side }) => (
+const FloatingButton: FC<Props> = ({ child, color, isRight, onClick }) => (
   <div
-    style={{ ...style, backgroundColor: color, [side]: 23 }}
     onClick={onClick}
+    style={{
+      ...style,
+      backgroundColor: color,
+      [isRight ? "right" : "left"]: 23,
+    }}
   >
     {child}
   </div>

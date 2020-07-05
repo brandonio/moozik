@@ -4,7 +4,7 @@ import React, { FC } from "react";
 const r: "fixed" = "fixed";
 const navbarStyle = {
   alignItems: "center",
-  background: "linear-gradient(to left, #0288d1, #3d99be 25%, #512da8)",
+  background: "linear-gradient(to left, #2196f3, #3d99be 30%, #512da8)",
   boxShadow: "0 3px 6px -2px #444",
   display: "flex",
   height: 70,

@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from "react";
 import AlbumsView from "./albumsView";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import FloatingButton from "./floatingButton";
+import Modal from "@material-ui/core/Modal";
 import GenreRow from "./genreRow";
 import { fetchAlbums, processAlbums, fetchGenres } from "../topAlbums";
 import { KeyboardArrowUp, Star } from "@material-ui/icons";
@@ -12,7 +13,7 @@ const Container: FC = () => {
   const [faves, setFaves] = useState<Faves>(
     JSON.parse(localStorage.getItem("faves") || `{"show": false}`)
   );
-  const [genres, setGenres] = useState<Genres>({ current: 1 });
+  const [genres, setGenres] = useState<Genres>({});
   const [popup, setPopup] = useState<string>("");
 
   useEffect(() => {
@@ -59,9 +60,9 @@ const Container: FC = () => {
         <div className="row">
           <GenreRow genres={genres} onGenreClick={handleGenreClick} />
 
-          {albumsToView === undefined ? (
+          {!albumsToView ? (
             <CircularProgress size={200} style={{ marginTop: 150 }} />
-          ) : albumsToView.length === 0 ? (
+          ) : !albumsToView.length ? (
             <h4>There's nothing here...</h4>
           ) : (
             <AlbumsView
@@ -72,19 +73,30 @@ const Container: FC = () => {
             />
           )}
 
-          <AlbumPopup album={albums[popup]} onClose={handleModalClose} />
+          {popup && (
+            <Modal
+              children={<AlbumPopup album={albums[popup]} />}
+              onClose={handleModalClose}
+              open={true}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            />
+          )}
 
           <FloatingButton
             child={<KeyboardArrowUp fontSize="large" />}
-            color={"#0288d1"}
+            color={"#2196f3"}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            side="left"
+            isRight={false}
           />
           <FloatingButton
             child={switchChild}
             color={faves.show ? "#512da8" : "#fcc830"}
             onClick={handleSwitchView}
-            side="right"
+            isRight={true}
           />
         </div>
       </div>

@@ -13,7 +13,7 @@ const GenreRow: FC<Props> = ({ genres, onGenreClick }) => (
       flexWrap: "wrap",
       justifyContent: "center",
       marginTop: 80,
-      marginBottom: 15,
+      marginBottom: 20,
     }}
   >
     {Object.entries(genres).map(

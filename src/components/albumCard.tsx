@@ -2,11 +2,10 @@ import React, { FC } from "react";
 import { FormControlLabel, Checkbox } from "@material-ui/core";
 import { StarBorder, Star } from "@material-ui/icons";
 
-const maxLength: number = 30;
+const MAX_LEN: number = 30;
 
-// TODO?: smarter trimming
-const trim = (s: string): string =>
-  s.length > maxLength ? s.substring(0, maxLength - 1) + "…" : s;
+const trunc = (s: string): string =>
+  s.substring(0, MAX_LEN).trim() + (s.length > MAX_LEN ? "…" : "");
 
 type Props = {
   album: Album;
@@ -18,10 +17,7 @@ type Props = {
 const AlbumCard: FC<Props> = ({ album, isFave, onModalOpen, onStarClick }) => {
   const { artist, id, image, title } = album;
   return (
-    <div
-      className="col"
-      style={{ width: "20%", marginLeft: "auto", left: "auto", right: "auto" }}
-    >
+    <div className="col" style={{ width: "20%", left: "auto", right: "auto" }}>
       <div
         onClick={() => onModalOpen(id)}
         className="card hoverable"
@@ -36,12 +32,7 @@ const AlbumCard: FC<Props> = ({ album, isFave, onModalOpen, onStarClick }) => {
           <FormControlLabel
             label=""
             className="btn-floating btn-small halfway-fab yellow darken-1"
-            style={{
-              right: "auto",
-              left: "auto",
-              marginRight: 0,
-              marginLeft: -16.2,
-            }}
+            style={{ right: "auto", marginLeft: -16.2 }}
             control={
               <Checkbox
                 checked={isFave}
@@ -54,19 +45,9 @@ const AlbumCard: FC<Props> = ({ album, isFave, onModalOpen, onStarClick }) => {
             }
           />
         </div>
-        <div
-          className="card-content center"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: 10,
-            paddingTop: 20,
-          }}
-        >
-          <span>
-            <b>{trim(title)}</b>
-          </span>
-          <span>{trim(artist)}</span>
+        <div className="card-content" style={{ padding: 10, paddingTop: 20 }}>
+          <p style={{ fontWeight: 700 }}>{trunc(title)}</p>
+          <p>{trunc(artist)}</p>
         </div>
       </div>
     </div>
